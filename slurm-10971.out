@@ -1,0 +1,6 @@
+Number of processes =   4, matrix   840  x  840, time ->   1.57, 1 core approx ->   6.26
+Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =   4, matrix  2520  x 2520, time ->  68.19, 1 core approx -> 272.77
+Matrix mult is correct (0 -> yes, else -> no): 0
+

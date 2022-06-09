@@ -1,0 +1,12 @@
+Number of processes - 1, matrix   840x  840, time - 2.78976. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 1, matrix  2520x 2520, time - 103.58465. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix   840x  840, time - 1.56548. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix  2520x 2520, time - 68.19283. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix   840x  840, time - 0.66539. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix  2520x 2520, time - 24.73257. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix   840x  840, time - 0.54409. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix  2520x 2520, time - 20.37086. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix   840x  840, time - 0.32288. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix  2520x 2520, time - 10.96760. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix   840x  840, time - 0.24147. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix  2520x 2520, time - 7.25896. Matrix mult is correct (0 -> yes, else -> no): 0
