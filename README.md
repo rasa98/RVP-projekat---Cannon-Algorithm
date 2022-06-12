@@ -1,2 +1,59 @@
+---- usage --------
+
 1) mpicc -std=c99 CannonAlgo.c -lm -o out
 2) sbatch "script-name"
+
+----- results -----
+
+10 times average:
+
+Number of processes - 1, matrix    60x   60, time - 0.00118. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix    60x   60, time - 0.00062. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix    60x   60, time - 0.00041. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix    60x   60, time - 0.00068. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix    60x   60, time - 0.05928. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix    60x   60, time - 0.08503. Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes - 1, matrix   120x  120, time - 0.00827. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix   120x  120, time - 0.00388. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix   120x  120, time - 0.00239. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix   120x  120, time - 0.00158. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix   120x  120, time - 0.04132. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix   120x  120, time - 0.04375. Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes - 1, matrix   300x  300, time - 0.13288. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix   300x  300, time - 0.06185. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix   300x  300, time - 0.02603. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix   300x  300, time - 0.01350. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix   300x  300, time - 0.06008. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix   300x  300, time - 0.09080. Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes - 1, matrix   540x  540, time - 0.85836. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix   540x  540, time - 0.39130. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix   540x  540, time - 0.16339. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix   540x  540, time - 0.09889. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix   540x  540, time - 0.17405. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix   540x  540, time - 0.12207. Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes - 1, matrix   840x  840, time - 3.30125. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix   840x  840, time - 1.56562. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix   840x  840, time - 0.63811. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix   840x  840, time - 0.40219. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix   840x  840, time - 0.45967. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix   840x  840, time - 0.38120. Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes - 1, matrix  2520x 2520, time - 106.61254. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 4, matrix  2520x 2520, time - 68.89383. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 9, matrix  2520x 2520, time - 24.23688. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 16, matrix  2520x 2520, time - 19.47284. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 25, matrix  2520x 2520, time - 11.05175. Matrix mult is correct (0 -> yes, else -> no): 0
+Number of processes - 36, matrix  2520x 2520, time - 9.13515. Matrix mult is correct (0 -> yes, else -> no): 0
+
+----- conclusion -----
+
+Za pokretanje koda sa 25 i 36 procesa moze se primetiti da samo u slucaju najvece matrice 2520 x 2520 daju bolje vreme (kolko toliko) . 
+U ostalim slucajevima komunikacija medju procesima cini mnogo veci overhead u odnosu na kolicinu posla koji svaki proces dobija, te su
+vremena cak i losija u odnosu na ona pokretanja sa manjim brojem procesa. U slucaju matrice 840 x 840 uocava se granica da vise od 16 
+procesa ne doprinosi nikakvom povecanju performansi.
+
+----------------------

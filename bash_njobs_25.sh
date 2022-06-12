@@ -13,7 +13,7 @@
 #SBATCH --job-name=rp-rvp-25
 
 p=25
-for size in 840 2520; do
+for size in 60 120 300 540 840 2520; do
 	mpirun -np $p out "${PWD}/matrix/A${size}.txt"\
 		            	"${PWD}/matrix/B${size}.txt"\
 				"${PWD}/matrix/C${size}.txt"\

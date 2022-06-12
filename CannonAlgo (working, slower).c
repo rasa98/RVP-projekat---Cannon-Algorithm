@@ -26,7 +26,6 @@ int isPerfectSquare(int n, int* p_sqrt){
     return 0; //
 }
 
-// t - times, rowcol - square matrix (same dimensions)
 int shiftLeftTimes(int i, int j, int rowcol, int t){
 	return i*rowcol+mod(j-t, rowcol);
 }
@@ -123,7 +122,7 @@ int printMatrixToFile(double *m, int row, int col, const char* filename){
 	return 1;
 }
 
-int appendBenchmarkToFile(int p, double t, int size, int same, const char* filename){
+int appendBenchmarkToFile(int p, double t, int size, const char* filename){
 	FILE *fptr;
 	fptr = fopen(filename, "a");
 
@@ -132,7 +131,7 @@ int appendBenchmarkToFile(int p, double t, int size, int same, const char* filen
 		return 0;
 	}
 
-	fprintf(fptr, "Number of processes - %d, matrix %5dx%5d, time - %.5lf. Matrix mult is correct (0 -> yes, else -> no): %d\n", p, size, size, t, same);
+	fprintf(fptr, "Number of processes - %d, matrix %5dx%5d, time - %.5lf\n", p, size, size, t);
 
 
 	fclose(fptr);
@@ -147,15 +146,11 @@ void printM(double* m, int row, int col){
 	}
 	printf("\n");
 }
-
-double all_time = 0;
-double* goodC;
-
-void do_job(int argc, char* argv[], int iter_num, int all_iter){
+int main(int argc, char* argv[]){
 	int  my_rank; /* rank of process */
 	int  p;       /* number of processes */
 	
-	
+	MPI_Init(&argc, &argv);
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
 	MPI_Comm_size(MPI_COMM_WORLD, &p);
 
@@ -168,7 +163,7 @@ void do_job(int argc, char* argv[], int iter_num, int all_iter){
 	
 	int sizeA;
 	double *A, *B, *C;
-	double local_start, local_finish, local_elapsed, elapsed;
+	double startTime, endTime;
 
 
 	if(my_rank == 0){
@@ -178,8 +173,8 @@ void do_job(int argc, char* argv[], int iter_num, int all_iter){
 		}
 		int sizeB = -1;
 		sizeA = -1;
-		readMatrixFromFile(&A, &sizeA, sizeB, p_sqrt, argv[1]);
-		readMatrixFromFile(&B, &sizeB, sizeA, p_sqrt, argv[2]);
+		readMatrixFromFile(&A, &sizeA, sizeB, p_sqrt, argv[1]);//"/home/rasapant/eclipse-workspace-c/ProjekatCannonAlgo/src/matrix/A1024.txt");
+		readMatrixFromFile(&B, &sizeB, sizeA, p_sqrt, argv[2]);//"/home/rasapant/eclipse-workspace-c/ProjekatCannonAlgo/src/matrix/B1024.txt");
 
 		if(sizeB != sizeA){
 			fprintf(stderr, "\nsizeA = %d, sizeB = %d\n", sizeA, sizeB);
@@ -187,20 +182,16 @@ void do_job(int argc, char* argv[], int iter_num, int all_iter){
 			MPI_Abort(MPI_COMM_WORLD, 0);
 		}
 
-		C=calloc(sizeA*sizeA, sizeof(double));		
+		C=calloc(sizeA*sizeA, sizeof(double));
+		startTime = MPI_Wtime();
 	}
 	MPI_Bcast(&sizeA, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	
-	MPI_Barrier(MPI_COMM_WORLD);
-	local_start = MPI_Wtime();
-	
 	int local_n = sizeA / p_sqrt;
 
 
 	double *locA=calloc(local_n*local_n, sizeof(double));
 	double *locB=calloc(local_n*local_n, sizeof(double));
 	
-	// reserve memory
 	double *locARes=calloc(local_n*local_n, sizeof(double));
 	double *locBRes=calloc(local_n*local_n, sizeof(double));
 	
@@ -240,77 +231,54 @@ void do_job(int argc, char* argv[], int iter_num, int all_iter){
 	int up_send = shiftUpTimes(i, j, p_sqrt, 1);
 	int up_recv = shiftUpTimes(i, j, p_sqrt, -1);
 	
+	MPI_Status stats[4];
+  	MPI_Request reqs[4];
 	
-  	MPI_Request reqs[2];
-  	MPI_Status stat[2];
-	
-	for(int ii=0; ii<p_sqrt-1;ii++){				
+	for(int ii=0; ii<p_sqrt-1;ii++){		
+		
 		
 		MPI_Isend(locA, local_n*local_n, MPI_DOUBLE, left_send, 0, MPI_COMM_WORLD, &reqs[0]);
 		MPI_Isend(locB, local_n*local_n, MPI_DOUBLE, up_send, 1, MPI_COMM_WORLD, &reqs[1]);
-		MPI_Recv(locARes, local_n*local_n, MPI_DOUBLE, left_recv, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-		MPI_Recv(locBRes, local_n*local_n, MPI_DOUBLE, up_recv, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);		
-
-		mulMat(locARes, locBRes, locC, local_n);
+		MPI_Irecv(locARes, local_n*local_n, MPI_DOUBLE, left_recv, 0, MPI_COMM_WORLD, &reqs[2]);
+		MPI_Irecv(locBRes, local_n*local_n, MPI_DOUBLE, up_recv, 1, MPI_COMM_WORLD, &reqs[3]);
 		
-		MPI_Waitall(2, reqs, stat);
+		MPI_Waitall(4, reqs, stats);
+		
 		tmp = locARes;
-		locARes = locA;//ne bitno
+		locARes = locA;
 		locA = tmp;		
 		
 		tmp = locBRes;
-		locBRes = locB;//ne bitno
-		locB = tmp;		
+		locBRes = locB;
+		locB = tmp;
+
+		mulMat(locA, locB, locC, local_n);
 	}	
 
 	MPI_Gatherv(locC, local_n*local_n, MPI_DOUBLE, C, sendcounts, Realdispls, gridtype, 0, MPI_COMM_WORLD);
 
 	free(locA);free(locB);free(locARes);free(locBRes);free(locC);
-	
-	local_finish = MPI_Wtime();	
-	local_elapsed = local_finish - local_start;
-	MPI_Reduce(&local_elapsed, &elapsed, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-	
-	if (my_rank == 0){		
-		printf("Number of processes = %3d, matrix %5d  x%5d, time -> %6.2lf, run %d/%d time\n", p, sizeA, sizeA, elapsed, iter_num, all_iter);
-		all_time+=elapsed;
-		// read in GOOD C (precomputed)
-		
-		if(iter_num == 1)
-			readMatrixFromFile(&goodC, &sizeA, sizeA, p_sqrt, argv[3]);
-		else{
-			printf("0 element : %lf", goodC[0]);
-		}
 
-		// double might be prone to making errors 
+	if (my_rank == 0){
+		endTime = MPI_Wtime();
+		double p_time = endTime - startTime;
+		printf("Number of processes = %3d, matrix %5d  x%5d, time -> %6.2lf, 1 core approx -> %6.2lf\n", p, sizeA, sizeA, p_time, p_time*p);
+
+		// read in GOOD C (precomputed)
+		double* goodC;
+		readMatrixFromFile(&goodC, &sizeA, sizeA, p_sqrt, argv[3]);
+
+		// if using double with decimals, prob wont work good
 		int same = memcmp(C, goodC, sizeof(C));
 		printf("Matrix mult is correct (0 -> yes, else -> no): %d\n\n", same);
 
-		//if(runtime_num == 0)
-			//printMatrixToFile(C, sizeA, sizeA, argv[4]);
-		if(all_iter == iter_num){			
-			all_time/=iter_num;
-			appendBenchmarkToFile(p, all_time, sizeA, same, argv[5]);
-			free(goodC);
-		}
 
-		free(A);free(B);free(C);
+		printMatrixToFile(C, sizeA, sizeA, argv[4]);//"/home/rasapant/eclipse-workspace-c/ProjekatCannonAlgo/src/matrix/C1024.txt");
+		appendBenchmarkToFile(p, p_time, sizeA, argv[5]);//"/home/rasapant/eclipse-workspace-c/ProjekatCannonAlgo/src/bench.txt");
+
+		free(A);free(B);free(C);free(goodC);
 		free(Realdispls);free(sendcounts);
 	}
-}
-int main(int argc, char* argv[]){
-	int  my_rank; /* rank of process */
-	int  p;       /* number of processes */
-
-	MPI_Init(&argc, &argv);		
-	
-	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
-	MPI_Comm_size(MPI_COMM_WORLD, &p);
-	
-	int n_iter = 10;	
-	for(int i=0; i<n_iter; i++){
-		do_job(argc, argv, i+1, n_iter);
-	}	
 
 	MPI_Finalize();
 

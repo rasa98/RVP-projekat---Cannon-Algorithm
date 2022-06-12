@@ -147,15 +147,11 @@ void printM(double* m, int row, int col){
 	}
 	printf("\n");
 }
-
-double all_time = 0;
-double* goodC;
-
-void do_job(int argc, char* argv[], int iter_num, int all_iter){
+int main(int argc, char* argv[]){
 	int  my_rank; /* rank of process */
 	int  p;       /* number of processes */
 	
-	
+	MPI_Init(&argc, &argv);
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
 	MPI_Comm_size(MPI_COMM_WORLD, &p);
 
@@ -168,7 +164,7 @@ void do_job(int argc, char* argv[], int iter_num, int all_iter){
 	
 	int sizeA;
 	double *A, *B, *C;
-	double local_start, local_finish, local_elapsed, elapsed;
+	double startTime, endTime;
 
 
 	if(my_rank == 0){
@@ -187,13 +183,10 @@ void do_job(int argc, char* argv[], int iter_num, int all_iter){
 			MPI_Abort(MPI_COMM_WORLD, 0);
 		}
 
-		C=calloc(sizeA*sizeA, sizeof(double));		
+		C=calloc(sizeA*sizeA, sizeof(double));
+		startTime = MPI_Wtime();
 	}
 	MPI_Bcast(&sizeA, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	
-	MPI_Barrier(MPI_COMM_WORLD);
-	local_start = MPI_Wtime();
-	
 	int local_n = sizeA / p_sqrt;
 
 
@@ -266,51 +259,27 @@ void do_job(int argc, char* argv[], int iter_num, int all_iter){
 	MPI_Gatherv(locC, local_n*local_n, MPI_DOUBLE, C, sendcounts, Realdispls, gridtype, 0, MPI_COMM_WORLD);
 
 	free(locA);free(locB);free(locARes);free(locBRes);free(locC);
-	
-	local_finish = MPI_Wtime();	
-	local_elapsed = local_finish - local_start;
-	MPI_Reduce(&local_elapsed, &elapsed, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-	
-	if (my_rank == 0){		
-		printf("Number of processes = %3d, matrix %5d  x%5d, time -> %6.2lf, run %d/%d time\n", p, sizeA, sizeA, elapsed, iter_num, all_iter);
-		all_time+=elapsed;
+
+	if (my_rank == 0){
+		endTime = MPI_Wtime();
+		double p_time = endTime - startTime;
+		printf("Number of processes = %3d, matrix %5d  x%5d, time -> %6.2lf, 1 core approx -> %6.2lf\n", p, sizeA, sizeA, p_time, p_time*p);
+
 		// read in GOOD C (precomputed)
-		
-		if(iter_num == 1)
-			readMatrixFromFile(&goodC, &sizeA, sizeA, p_sqrt, argv[3]);
-		else{
-			printf("0 element : %lf", goodC[0]);
-		}
+		double* goodC;
+		readMatrixFromFile(&goodC, &sizeA, sizeA, p_sqrt, argv[3]);
 
 		// double might be prone to making errors 
 		int same = memcmp(C, goodC, sizeof(C));
 		printf("Matrix mult is correct (0 -> yes, else -> no): %d\n\n", same);
 
-		//if(runtime_num == 0)
-			//printMatrixToFile(C, sizeA, sizeA, argv[4]);
-		if(all_iter == iter_num){			
-			all_time/=iter_num;
-			appendBenchmarkToFile(p, all_time, sizeA, same, argv[5]);
-			free(goodC);
-		}
 
-		free(A);free(B);free(C);
+		printMatrixToFile(C, sizeA, sizeA, argv[4]);
+		appendBenchmarkToFile(p, p_time, sizeA, same, argv[5]);
+
+		free(A);free(B);free(C);free(goodC);
 		free(Realdispls);free(sendcounts);
 	}
-}
-int main(int argc, char* argv[]){
-	int  my_rank; /* rank of process */
-	int  p;       /* number of processes */
-
-	MPI_Init(&argc, &argv);		
-	
-	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
-	MPI_Comm_size(MPI_COMM_WORLD, &p);
-	
-	int n_iter = 10;	
-	for(int i=0; i<n_iter; i++){
-		do_job(argc, argv, i+1, n_iter);
-	}	
 
 	MPI_Finalize();
 

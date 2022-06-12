@@ -1,0 +1,180 @@
+Number of processes =  25, matrix    60  x   60, time ->   0.10, run 1/10 time
+Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.10, run 2/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.06, run 3/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.01, run 4/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.03, run 5/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.09, run 6/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.10, run 7/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.06, run 8/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.01, run 9/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix    60  x   60, time ->   0.02, run 10/10 time
+0 element : 39150.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.04, run 1/10 time
+Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.05, run 2/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.04, run 3/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.04, run 4/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.05, run 5/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.05, run 6/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.03, run 7/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.04, run 8/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.05, run 9/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   120  x  120, time ->   0.03, run 10/10 time
+0 element : 60687.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.05, run 1/10 time
+Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.03, run 2/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.10, run 3/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.03, run 4/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.04, run 5/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.08, run 6/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.08, run 7/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.12, run 8/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.03, run 9/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   300  x  300, time ->   0.04, run 10/10 time
+0 element : 187508.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.18, run 1/10 time
+Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.17, run 2/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.17, run 3/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.17, run 4/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.18, run 5/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.18, run 6/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.16, run 7/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.18, run 8/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.19, run 9/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   540  x  540, time ->   0.17, run 10/10 time
+0 element : 309027.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.49, run 1/10 time
+Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.43, run 2/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.43, run 3/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.46, run 4/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.47, run 5/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.47, run 6/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.45, run 7/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.49, run 8/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.42, run 9/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix   840  x  840, time ->   0.47, run 10/10 time
+0 element : 530147.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  11.72, run 1/10 time
+Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  11.84, run 2/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  11.41, run 3/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  11.33, run 4/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  11.15, run 5/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  10.83, run 6/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  10.80, run 7/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  10.89, run 8/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->  10.69, run 9/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
+Number of processes =  25, matrix  2520  x 2520, time ->   9.85, run 10/10 time
+0 element : 1590298.000000Matrix mult is correct (0 -> yes, else -> no): 0
+
