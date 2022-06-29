@@ -1,9 +1,9 @@
----- usage --------
+## usage
 
 1) mpicc -std=c99 CannonAlgo.c -lm -o out
 2) sbatch "script-name"
 
------ results (bench.txt)-----
+## results (bench.txt)
 
 10 times average:
 
@@ -18,11 +18,11 @@
 
 
 
------ conclusion -----
+# conclusion 
 
 Za pokretanje koda sa 25 i 36 procesa moze se primetiti da samo u slucaju najvece matrice 2520 x 2520 daju bolje vreme (kolko toliko) . 
 U ostalim slucajevima komunikacija medju procesima cini mnogo veci overhead u odnosu na kolicinu posla koji svaki proces dobija, te su
 vremena cak i losija u odnosu na ona pokretanja sa manjim brojem procesa. U slucaju matrice 840 x 840 uocava se granica da vise od 16 
 procesa ne doprinosi nikakvom povecanju performansi.
 
-----------------------
+
